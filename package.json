@@ -1,0 +1,24 @@
+{
+  "name": "prosaibackjs",
+  "version": "1.0.0",
+  "description": "proyecto en primera etapa de SAI (sistema de Administracion de Iglesias) backEnd",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mercadol/prosaibackjs.git"
+  },
+  "keywords": [
+    "sai",
+    "backend",
+    "iglesia"
+  ],
+  "author": "Leonardo Mercado",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mercadol/prosaibackjs/issues"
+  },
+  "homepage": "https://github.com/mercadol/prosaibackjs#readme"
+}
