@@ -4,7 +4,7 @@
   "description": "proyecto en primera etapa de SAI (sistema de Administracion de Iglesias) backEnd",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/mercadol/prosaibackjs/issues"
   },
-  "homepage": "https://github.com/mercadol/prosaibackjs#readme"
+  "homepage": "https://github.com/mercadol/prosaibackjs#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.6",
+    "nodemon": "^2.0.19"
+  }
 }
