@@ -1,7 +1,11 @@
 const express = require('express');
+const routerApi =require('./routes/index')
+
 
 const app= express();
 const port =3000
+
+app.use(express.json());
 
 app.get('/', (req, res) =>{
     res.send('hola');
@@ -10,23 +14,7 @@ app.get('/', (req, res) =>{
 app.get('/nuevaruta', (req, res) =>{
     res.send('hola soy un nuevo endpoint');
 });
-
-app.get('/products', (req, res) =>{
-    res.json([{
-        nombre: "producto 1",
-        precio: 2000
-
-    }]);
-});
-
-app.get('/products/:id', (req, res) =>{
-    const {id} = req.params;
-    res.json({
-        nombre: "producto 1",
-        precio: 2000
-
-    });
-});
+routerApi(app);
 
 
 app.listen(port, ()=>{
