@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const ProductsService= require('./../services/products.service');
+
+const service = new ProductsService();
 
 router.get('/', (req, res) =>{
-    res.json([{
-        nombre: "producto 1",
-        precio: 2000
-
-    }]);
+    const products = service.find();
+    res.json(products);
 });
 
 router.get('/filter', (req, res) => {
@@ -15,43 +15,27 @@ router.get('/filter', (req, res) => {
 
 router.get('/:id', (req, res) =>{
     const {id} = req.params;
-    if (id==='999'){
-        res.status(404).json({
-            message:"no encontrado"
-        })
-    } else{
-        res.json({
-            nombre: "producto 1",
-            precio: 2000
-    
-        });
-    }
+    const products = service.findOne(id);
+    res.json(products);
 });
 
 router.post('/', (req, res) =>{
     const body = req.body;
-    res.status(201).json({
-        message: 'created',
-        data:body
-    });
+    const newProduct = service.create(body);
+    res.status(201).json(newProduct);
 });
 
 router.patch('/:id', (req, res) =>{
     const { id } = req.params
     const body = req.body;
-    res.json({
-        message: 'update',
-        data:body,
-        id
-    });
+    const product=service.update(id,body);
+    res.json(product);
 });
 
 router.delete('/:id', (req, res) =>{
-    const { id } = req.params
-    res.json({
-        message: 'delete',
-        id
-    });
+    const { id } = req.params;
+    const rta = service.delete(id);
+    res.json(rta);
 });
 
 module.exports = router;
