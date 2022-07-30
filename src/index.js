@@ -1,24 +1,16 @@
-const express = require('express');
-const routerApi =require('./routes/index')
-const {logErrors, errorHandler} =require('./middlewares/error.handler');
+const mongoose = require('mongoose');
+const app = require('./app');
+require('dotenv').config();
+const port = process.env.PORT || 3000;
 
-const app= express();
-const port =3000
 
-app.use(express.json());
+mongoose.Promise=global.Promise;
 
-app.get('/', (req, res) =>{
-    res.send('hola');
-});
-
-app.get('/nuevaruta', (req, res) =>{
-    res.send('hola soy un nuevo endpoint');
-});
-routerApi(app);
-
-app.use(logErrors);
-app.use(errorHandler);
-
-app.listen(port, ()=>{
-    console.log(`servidor corriendo ${port}`);
-});
+mongoose.connect('mongodb://127.0.0.1:27017/prosaiapi', { useNewUrlParser: true })
+    .then(()=>{
+        console.log('La conexion a la base de datos se a realizado bien!!');
+        //creamos el servidor y ponemos las peticiones https
+        app.listen(port,() =>{
+        console.log('servidor corriendo en http://localhost:'+port);
+        });
+    });
