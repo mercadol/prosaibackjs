@@ -1,6 +1,7 @@
 const express = require('express');
 const routerApi =require('./routes/index');
 const cors = require('cors');
+const {chackApiKey} = require('./middlewares/auth.handler')
 const {logErrors, errorHandler, BoomErrorHandler} =require('./middlewares/error.handler');
 
 const app= express();
@@ -19,11 +20,13 @@ const options ={
 
 app.use(cors(options));
 
+require('./utils/auth');
+
 app.get('/', (req, res) =>{
     res.send('hola');
 });
 
-app.get('/nuevaruta', (req, res) =>{
+app.get('/nuevaruta', chackApiKey, (req, res) =>{
     res.send('hola soy un nuevo endpoint');
 });
 routerApi(app);
