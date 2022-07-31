@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const MiembroSchema = Schema({
-  numDocument:{type: String},
+  numDocument:{type: String, unique:true},
   fullName:String,
   maritalStatus:String,
   age:Number,
   genere: String,
-  email:String,
+  email:{type: String, unique:true},
   occupation:String,
   isBaptized:Boolean,
 });
