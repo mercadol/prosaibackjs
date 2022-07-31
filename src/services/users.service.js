@@ -1,17 +1,33 @@
 const boom = require('@hapi/boom');
-const validator = require('validator');
-//const User = require('../models/miembros.model');
+const bcrypt = require('bcrypt');
+const User = require('../models/users.model');
 
 class UserService{
     //constructor: constructor(){}
 
-    create(data){}
+    async create(data){
+        const hash = await bcrypt.hash(data.password, 10);
+        const newUser ={
+            ...data,
+            password:hash
+        };
+        const usuario = new User(newUser);
+        await usuario.save();
+        return newUser;
+    }
     async find(){        
         const users = await User.find({});
         if (!users){
             throw boom.notFound('no hay elementos para mostrar');
         }
         return users.sort();
+    }
+    async findByEmail(email){        
+        const users = await User.findOne({email:email});
+        if (!users){
+            throw boom.notFound('User not found');
+        }
+        return users;
     }
     async findOne(id){
         const user = await User.findById(_id);
