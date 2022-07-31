@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const MiembroService= require('./../services/miembro.service');
+const MiembroService= require('./../services/miembros.service');
 
 const service = new MiembroService();
 
