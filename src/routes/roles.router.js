@@ -2,8 +2,8 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 const RoleService= require('./../services/roles.service');
-
 const service = new RoleService();
+const {chechkRoles} = require('./../middlewares/auth.handler');
 
 
 router.get('/', async (req, res, next) =>{
@@ -32,6 +32,7 @@ router.get('/filter', (req, res) => {
 
 router.post('/',
     passport.authenticate('jwt', {session:false}),
+    chechkRoles('Admin'),
     (req, res) =>{
     const body = req.body;
     const newRole = service.create(body);
