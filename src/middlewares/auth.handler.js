@@ -10,4 +10,24 @@ function chackApiKey(req, res, next) {
     }
 }
 
-module.exports = { chackApiKey }
+function chechkAdminRole(req, res, next){
+    const user = req.user;
+    if (user.role === 'Admin'){
+        next();
+    } else {
+        next(boom.unauthorized());
+    }
+}
+
+function chechkRoles (...roles){
+    return (req, res, next)=>{
+        const user = req.user;
+        if(roles.includes(user.role)){
+            next();
+        } else {
+            next (boom.unauthorized());
+        }
+    }
+}
+
+module.exports = { chackApiKey, chechkAdminRole, chechkRoles }
