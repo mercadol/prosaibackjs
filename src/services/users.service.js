@@ -30,14 +30,15 @@ class UserService{
         return users;
     }
     async findOne(id){
-        const user = await User.findById(_id);
+        let user = await User.findById(id);
         if (!user){
             throw boom.notFound('User not found');
         }
+        user= { "email":user.email, "role":user.role};
         return user;
     }
     async update(id, body){
-        const user = await User.findByIdAndUpdate({_id:_id}, body, {new:true});
+        const user = await User.findByIdAndUpdate({_id:id}, body, {new:true});
         if (!user){
             if(!elementUbdated) throw boom.notFound('Error, Elemento no encontrado');
         }

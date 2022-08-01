@@ -53,7 +53,7 @@ class MiembroService{
         
         const miembro = await Miembro.findByIdAndUpdate({_id:_id}, body, {new:true});
         if (!miembro){
-            if(!elementUbdated) throw boom.notFound('Error, Elemento no encontrado');
+            throw boom.notFound('Error, Elemento no encontrado');
         }
         return miembro;
 
