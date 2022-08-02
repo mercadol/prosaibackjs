@@ -2,7 +2,7 @@ const express = require('express');
 const routerApi =require('./routes/index');
 const cors = require('cors');
 const {chackApiKey} = require('./middlewares/auth.handler')
-const {logErrors, errorHandler, BoomErrorHandler} =require('./middlewares/error.handler');
+const {logErrors, errorHandler, boomErrorHandler} =require('./middlewares/error.handler');
 
 const app= express();
 
@@ -32,7 +32,7 @@ app.get('/nuevaruta', chackApiKey, (req, res) =>{
 routerApi(app);
 
 app.use(logErrors);
-app.use(BoomErrorHandler);
+app.use(boomErrorHandler);
 app.use(errorHandler);
 
 

@@ -45,7 +45,7 @@ class UserService{
         return user;
     }
     async delete(id){
-        await Miembro.findByIdAndDelete({_id:id});
+        await User.findByIdAndDelete({_id:id});
         return {id};
     }
 

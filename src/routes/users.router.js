@@ -23,9 +23,6 @@ router.get('/:_id', async(req, res, next) =>{
     }
 });
 
-router.get('/filter', (req, res) => {
-    res.send('soy un filter');
-});
 
 router.post('/', (req, res) =>{
     const body = req.body;
@@ -33,21 +30,21 @@ router.post('/', (req, res) =>{
     res.status(201).json(newUser);
 });
 
-router.patch('/:_id', async (req, res, next) =>{
+router.patch('/:id', async (req, res, next) =>{
     try {
-        const { _id } = req.params
+        const { id } = req.params
         const body = req.body;
-        const user= await service.update(_id,body);
+        const user= await service.update(id,body);
         res.json(user);
     } catch (err) {
         next(err);
     }
 });
 
-router.delete('/:_id', (req, res, next) =>{
+router.delete('/:id', (req, res, next) =>{
     try {
-        const { _id } = req.params;
-        const rta = service.delete(_id);
+        const { id } = req.params;
+        const rta = service.delete(id);
         res.json(rta);
     } catch (err) {
         next(err);
