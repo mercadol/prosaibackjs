@@ -13,10 +13,10 @@ router.get('/', async(req, res, next) =>{
     }
 });
 
-router.get('/:_id', async(req, res, next) =>{
+router.get('/id/:id', async(req, res, next) =>{
     try{
-        const {_id} = req.params;
-        const miembro = await service.findOne(_id);
+        const {id} = req.params;
+        const miembro = await service.findOne(id);
         res.json(miembro);
     } catch (err) {
         next(err);
@@ -24,8 +24,13 @@ router.get('/:_id', async(req, res, next) =>{
 
 });
 
-router.get('/filter', (req, res) => {
-    res.send('soy un filter');
+router.get('/filter', async (req, res, next) => {
+    try{
+        const miembros =  await service.filtro(req.query);
+        if (miembros) res.json(miembros);
+    } catch(error) {
+        next(error);
+    }
 });
 
 router.post('/', (req, res) =>{

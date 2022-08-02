@@ -6,11 +6,11 @@ class RoleService{
 
     create(data){
         try{
-            var validateroleName = !validator.isEmpty(data.roleName);
+            const validateRoleName = !validator.isEmpty(data.roleName);
         } catch (error) {
             throw boom.notFound('faltan datos');
         }
-        if(validateroleName){
+        if(validateRoleName){
             const newRole = {
                 ...data
             }
